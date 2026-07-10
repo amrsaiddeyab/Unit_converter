@@ -1,130 +1,166 @@
+#main
+
 import gui
-import tkinter as tk
 
-def weight_choice():
-    def weight_converter():
-        units= ["kg", "g", "mg"]
+def main():
+    def validation(number, units, unit1, unit2):
+        try:
+            number = float(number)
+            if number >= 0:
+                r2= True
+            
+            else:
+                r2= False
+
+        except ValueError:
+            r2= False
+
+        if (unit1 not in units) or (unit2 not in units):
+            r1 = False
         
-        input_number= weight_obj.weight_number_var.get()
-        input_unit_t_convert = weight_obj.weight_unit_t_convert_var.get()
-        input_unit_after= weight_obj.weight_unit_after_var.get()
-
-        if (input_unit_t_convert.lower() not in units or input_unit_after.lower() not in units) and (not input_number.isdigit()):
-            weight_obj.weight_error("number", "unit")
-
-        elif input_unit_t_convert.lower() not in units or input_unit_after.lower() not in units:
-            weight_obj.weight_error("unit")
-
-        elif not input_number.isdigit():
-            weight_obj.weight_error('0', "number")
-
         else:
-            input_number= int(input_number)
-            if input_unit_t_convert == "kg" and input_unit_after == "g":
-                result= input_number*1000
+            r1 = True
+            
+        return (r1, r2)
 
-            elif input_unit_t_convert == "kg" and input_unit_after == "mg":
-                result= input_number*1000000
+    def weight_choice():
+        def weight_converter():
+            units= ["kg", "g", "mg"]
+            
+            number= weight_obj.weight_number_var.get() 
+            unit_from = weight_obj.weight_unit_from_var.get()
+            unit_to= weight_obj.weight_unit_to_var.get()
 
-            elif input_unit_t_convert == "g" and input_unit_after == "kg":
-                result= input_number/1000
+            unit_from= unit_from.lower().strip()
+            unit_to= unit_to.lower().strip()
 
-            elif input_unit_t_convert == "g" and input_unit_after == "mg":
-                result= input_number*1000
+            r1, r2 = validation(number, units, unit_from, unit_to)
 
-            elif input_unit_t_convert == "mg" and input_unit_after == "kg":
-                result= input_number/1000000
+            if (not r1) and (not r2):
+                weight_obj.weight_error("number", "unit")
+
+            elif not r1:
+                weight_obj.weight_error("unit")
+
+            elif not r2:
+                weight_obj.weight_error(None, "number")
 
             else:
-                result= input_number/1000
+                units_dict= {
+                    "kg": 1,
+                    "g": 1000,
+                    "mg": 1000000
+                }
 
-            weight_obj.weight_convert_display(input_number, input_unit_t_convert, input_unit_after, result)
+                number= int(number)
 
-    weight_obj= gui.Unit_converter_weight(weight_converter)
+                result= number * (units_dict[unit_to] / units_dict[unit_from])
 
-def distance_choice():
-    def distance_converter():
-        units= ["km", "m", "cm"]
+                if len(str(result)) > 5 :
+                    result= round(result, 6)
 
-        input_number= distance_obj.distance_number_var.get()
-        input_unit_t_convert = distance_obj.distance_unit_t_convert_var.get()
-        input_unit_after= distance_obj.distance_unit_after_var.get()
+                if int(result) == result:
+                    result= int(result)
 
-        if (input_unit_t_convert.lower() not in units or input_unit_after.lower() not in units) and (not input_number.isdigit()):
-            distance_obj.distance_error("number", "unit")
+                weight_obj.weight_convert_display(number, unit_from, unit_to, result)
+        
+        unit_obj.root.withdraw()
 
-        elif input_unit_t_convert.lower() not in units or input_unit_after.lower() not in units:
-            distance_obj.distance_error("unit")
+        weight_obj= gui.Unit_converter_weight(unit_obj.root, weight_converter)
 
-        elif not input_number.isdigit():
-            distance_obj.distance_error('0', "number")
+    def distance_choice():
+        def distance_converter():
+            units= ["km", "m", "cm"]
 
-        else:
-            input_number= int(input_number)
-            if input_unit_t_convert == "km" and input_unit_after == "m":
-                result= input_number*1000
+            number= distance_obj.distance_number_var.get()
+            unit_from= distance_obj.distance_unit_from_var.get()
+            unit_to= distance_obj.distance_unit_to_var.get()
 
-            elif input_unit_t_convert == "km" and input_unit_after == "cm":
-                result= input_number*100000
+            unit_from= unit_from.lower().strip()
+            unit_to= unit_to.lower().strip()
 
-            elif input_unit_t_convert == "m" and input_unit_after == "km":
-                result= input_number/1000
+            r1, r2 = validation(number, units, unit_from, unit_to)
 
-            elif input_unit_t_convert == "m" and input_unit_after == "cm":
-                result= input_number*100
+            if (not r1) and (not r2):
+                distance_obj.distance_error("number", "unit")
 
-            elif input_unit_t_convert == "cm" and input_unit_after == "km":
-                result= input_number/100000
+            elif not r1:
+                distance_obj.distance_error("unit")
 
-            else:
-                result= input_number/100
-
-            distance_obj.distance_convert_display(input_number, input_unit_t_convert, input_unit_after, result)
-
-    distance_obj= gui.Unit_converter_distance(distance_converter)
-
-def time_choice():
-    def time_converter():
-        units= ["hr", "min", "sec"]
-
-        input_number= time_obj.time_number_var.get()
-        input_unit_t_convert = time_obj.time_unit_t_convert_var.get()
-        input_unit_after= time_obj.time_unit_after_var.get()
-
-        if (input_unit_t_convert.lower() not in units or input_unit_after.lower() not in units) and (not input_number.isdigit()):
-            time_obj.time_error("number", "unit")
-
-        elif input_unit_t_convert.lower() not in units or input_unit_after.lower() not in units:
-            time_obj.time_error("unit")
-
-        elif not input_number.isdigit():
-            time_obj.time_error('0', "number")
-
-        else:
-            input_number= int(input_number)
-            if input_unit_t_convert == "hr" and input_unit_after == "min":
-                result= input_number*60
-
-            elif input_unit_t_convert == "hr" and input_unit_after == "sec":
-                result= input_number*3600
-
-            elif input_unit_t_convert == "min" and input_unit_after == "hr":
-                result= input_number/60 
-
-            elif input_unit_t_convert == "min" and input_unit_after == "sec":
-                result= input_number*60
-
-            elif input_unit_t_convert == "sec" and input_unit_after == "hr":
-                result= input_number/3600
+            elif not r2:
+                distance_obj.distance_error(None, "number")
 
             else:
-                result= input_number/60
+                units_dict= {
+                    "km": 1,
+                    "m": 1000,
+                    "cm": 100000
+                }
 
+                number= int(number)
 
-            time_obj.time_convert_display(input_number, input_unit_t_convert, input_unit_after, result)
+                result= number * (units_dict[unit_to] / units_dict[unit_from])
 
-    time_obj= gui.Unit_converter_time(time_converter)
+                if len(str(result)) > 5 :
+                    result= round(result, 6)
 
-unit_obj= gui.Unit_converter_intro(weight_choice, distance_choice, time_choice)
+                if int(result) == result:
+                    result= int(result)
 
-unit_obj.run()
+                distance_obj.distance_convert_display(number, unit_from, unit_to, result)
+
+        unit_obj.root.withdraw()
+        
+        distance_obj= gui.Unit_converter_distance(unit_obj.root, distance_converter)
+
+    def time_choice():
+        def time_converter():
+            units= ["hr", "min", "sec"]
+
+            number= time_obj.time_number_var.get()
+            unit_from = time_obj.time_unit_from_var.get()
+            unit_to= time_obj.time_unit_to_var.get()
+
+            unit_from= unit_from.lower().strip()
+            unit_to= unit_to.lower().strip()
+
+            r1, r2 = validation(number, units, unit_from, unit_to)
+
+            if (not r1) and (not r2):
+                time_obj.time_error("number", "unit")
+
+            elif not r1:
+                time_obj.time_error("unit")
+
+            elif not r2:
+                time_obj.time_error(None, "number")
+
+            else:
+                units_dict= {
+                    "hr": 1,
+                    "min": 60,
+                    "sec": 3600
+                }
+
+                number= int(number)
+
+                result= number * (units_dict[unit_to] / units_dict[unit_from])
+
+                if len(str(result)) > 5 :
+                    result= round(result, 6)
+
+                if int(result) == result:
+                    result= int(result)
+
+                time_obj.time_convert_display(number, unit_from, unit_to, result)
+        
+        unit_obj.root.withdraw()
+        
+        time_obj= gui.Unit_converter_time(unit_obj.root, time_converter)
+
+    unit_obj= gui.Unit_converter_intro(weight_choice, distance_choice, time_choice)
+
+    unit_obj.run()
+
+if __name__=="__main__":
+    main()
