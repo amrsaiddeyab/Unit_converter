@@ -6,26 +6,32 @@ def main():
     def validation(number, units, unit1, unit2):
         try:
             number = float(number)
-            if number >= 0:
-                r2= True
-            
-            else:
-                r2= False
+            error2= not (number >= 0)
 
         except ValueError:
-            r2= False
+            number= None
+            error2= True
 
-        if (unit1 not in units) or (unit2 not in units):
-            r1 = False
-        
-        else:
-            r1 = True
+        error1 = not ((unit1 in units) and (unit2 in units))
             
-        return (r1, r2)
+        return (error1, error2, number)
+    
+    def calculate(units_dict, number, unit_from, unit_to):
+        if number.is_integer():
+            number= int(number)
+
+        result= number * (units_dict[unit_to] / units_dict[unit_from])
+
+        result= round(result, 6)
+
+        if result.is_integer():
+            result= int(result)
+
+        return result, number
 
     def weight_choice():
         def weight_converter():
-            units= ["kg", "g", "mg"]
+            units= ("kg", "g", "mg")
             
             number= weight_obj.weight_number_var.get() 
             unit_from = weight_obj.weight_unit_from_var.get()
@@ -34,16 +40,20 @@ def main():
             unit_from= unit_from.lower().strip()
             unit_to= unit_to.lower().strip()
 
-            r1, r2 = validation(number, units, unit_from, unit_to)
+            error1, error2, number = validation(number, units, unit_from, unit_to)
 
-            if (not r1) and (not r2):
-                weight_obj.weight_error("number", "unit")
 
-            elif not r1:
-                weight_obj.weight_error("unit")
+            if error1 or error2:
+                weight_obj.weight_error_display()
 
-            elif not r2:
-                weight_obj.weight_error(None, "number")
+                if (error1) and (error2):
+                    weight_obj.weight_error_both()
+
+                elif error1:
+                    weight_obj.weight_error_first()
+
+                else:
+                    weight_obj.weight_error_second()
 
             else:
                 units_dict= {
@@ -52,15 +62,7 @@ def main():
                     "mg": 1000000
                 }
 
-                number= int(number)
-
-                result= number * (units_dict[unit_to] / units_dict[unit_from])
-
-                if len(str(result)) > 5 :
-                    result= round(result, 6)
-
-                if int(result) == result:
-                    result= int(result)
+                result, number= calculate(units_dict, number, unit_from, unit_to)
 
                 weight_obj.weight_convert_display(number, unit_from, unit_to, result)
         
@@ -70,7 +72,7 @@ def main():
 
     def distance_choice():
         def distance_converter():
-            units= ["km", "m", "cm"]
+            units= ("km", "m", "cm")
 
             number= distance_obj.distance_number_var.get()
             unit_from= distance_obj.distance_unit_from_var.get()
@@ -79,16 +81,19 @@ def main():
             unit_from= unit_from.lower().strip()
             unit_to= unit_to.lower().strip()
 
-            r1, r2 = validation(number, units, unit_from, unit_to)
+            error1, error2, number = validation(number, units, unit_from, unit_to)
 
-            if (not r1) and (not r2):
-                distance_obj.distance_error("number", "unit")
+            if error1 or error2:
+                distance_obj.distance_error_display()
 
-            elif not r1:
-                distance_obj.distance_error("unit")
+                if (error1) and (error2):
+                    distance_obj.distance_error_both()
 
-            elif not r2:
-                distance_obj.distance_error(None, "number")
+                elif error1:
+                    distance_obj.distance_error_first()
+
+                else:
+                    distance_obj.distance_error_second()
 
             else:
                 units_dict= {
@@ -97,15 +102,7 @@ def main():
                     "cm": 100000
                 }
 
-                number= int(number)
-
-                result= number * (units_dict[unit_to] / units_dict[unit_from])
-
-                if len(str(result)) > 5 :
-                    result= round(result, 6)
-
-                if int(result) == result:
-                    result= int(result)
+                result, number= calculate(units_dict, number, unit_from, unit_to)
 
                 distance_obj.distance_convert_display(number, unit_from, unit_to, result)
 
@@ -115,7 +112,7 @@ def main():
 
     def time_choice():
         def time_converter():
-            units= ["hr", "min", "sec"]
+            units= ("hr", "min", "sec")
 
             number= time_obj.time_number_var.get()
             unit_from = time_obj.time_unit_from_var.get()
@@ -124,16 +121,19 @@ def main():
             unit_from= unit_from.lower().strip()
             unit_to= unit_to.lower().strip()
 
-            r1, r2 = validation(number, units, unit_from, unit_to)
+            error1, error2, number = validation(number, units, unit_from, unit_to)
 
-            if (not r1) and (not r2):
-                time_obj.time_error("number", "unit")
+            if error1 or error2:
+                time_obj.time_error_display()
 
-            elif not r1:
-                time_obj.time_error("unit")
+                if (error1) and (error2):
+                    time_obj.time_error_both()
 
-            elif not r2:
-                time_obj.time_error(None, "number")
+                elif error1:
+                    time_obj.time_error_first()
+
+                else:
+                    time_obj.time_error_second()
 
             else:
                 units_dict= {
@@ -142,15 +142,7 @@ def main():
                     "sec": 3600
                 }
 
-                number= int(number)
-
-                result= number * (units_dict[unit_to] / units_dict[unit_from])
-
-                if len(str(result)) > 5 :
-                    result= round(result, 6)
-
-                if int(result) == result:
-                    result= int(result)
+                result, number= calculate(units_dict, number, unit_from, unit_to)
 
                 time_obj.time_convert_display(number, unit_from, unit_to, result)
         

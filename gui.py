@@ -167,7 +167,7 @@ class Unit_converter_weight():
                         font=("Arial", 30, "bold"))
         self.weight_result.grid(row=3, column=0, columnspan=2, sticky="we")
 
-    def weight_error(self, e1= None, e2= None):
+    def weight_error_display(self):
         self.weight_error_window= tk.Toplevel()
         self.weight_error_window.title("Error!")
         self.weight_error_window.resizable(False, False)
@@ -185,44 +185,44 @@ class Unit_converter_weight():
                         font=("Arial", 30, "bold"))
         self.weight_error_text.grid(row=0, column=0, columnspan=2, sticky="ew")
 
-        if (e1 and e2):
-            tk.Label(self.weight_error_window, text="\n\n",
-                        bg="black",
-                        font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
+    def weight_error_both(self):
+        tk.Label(self.weight_error_window, text="\n\n",
+                    bg="black",
+                    font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
 
-            self.weight_result= tk.Label(self.weight_error_window,
-                        text=f"1. 'Number' must be a number greater than or equal to zero",
-                            bg="blue", fg="white",
-                            font=("Arial", 15, "bold"))
-            self.weight_result.grid(row=3, column=0, columnspan=2, sticky="w")
+        self.weight_result= tk.Label(self.weight_error_window,
+                    text=f"1. 'Number' must be a number greater than or equal to zero",
+                        bg="blue", fg="white",
+                        font=("Arial", 15, "bold"))
+        self.weight_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
-            self.weight_result= tk.Label(self.weight_error_window,
-                        text=f"2. Units must be one from these: ('kg', 'g', 'mg')",
-                            bg="blue", fg="white",
-                            font=("Arial", 15, "bold"))
-            self.weight_result.grid(row=4, column=0, columnspan=2, sticky="w")
+        self.weight_result= tk.Label(self.weight_error_window,
+                    text=f"2. Units must be one from these: ('kg', 'g', 'mg')",
+                        bg="blue", fg="white",
+                        font=("Arial", 15, "bold"))
+        self.weight_result.grid(row=4, column=0, columnspan=2, sticky="w")
 
-        elif e1:
-            tk.Label(self.weight_error_window, text="\n\n",
-                        bg="black",
-                        font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
+    def weight_error_first(self):
+        tk.Label(self.weight_error_window, text="\n\n",
+                    bg="black",
+                    font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
 
-            self.weight_result= tk.Label(self.weight_error_window,
-                        text=f"1. Units must be one from these: ('kg', 'g', 'mg')",
-                            bg="blue", fg="white",
-                            font=("Arial", 18, "bold"))
-            self.weight_result.grid(row=3, column=0, columnspan=2, sticky="w")
+        self.weight_result= tk.Label(self.weight_error_window,
+                    text=f"1. Units must be one from these: ('kg', 'g', 'mg')",
+                        bg="blue", fg="white",
+                        font=("Arial", 18, "bold"))
+        self.weight_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
-        else:
-            tk.Label(self.weight_error_window, text="\n\n",
-                        bg="black",
-                        font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="w")
+    def weight_error_second(self):
+        tk.Label(self.weight_error_window, text="\n\n",
+                    bg="black",
+                    font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="w")
 
-            self.weight_result= tk.Label(self.weight_error_window,
-                        text=f"1. 'Number' must be a number greater than or equal to zero",
-                            bg="blue", fg="white",
-                            font=("Arial", 15, "bold"))
-            self.weight_result.grid(row=3, column=0, columnspan=2, sticky="w")
+        self.weight_result= tk.Label(self.weight_error_window,
+                    text=f"1. 'Number' must be a number greater than or equal to zero",
+                        bg="blue", fg="white",
+                        font=("Arial", 15, "bold"))
+        self.weight_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
     def weight_windows_exit(self):
         self.weight_error_window.destroy()
@@ -334,7 +334,7 @@ class Unit_converter_distance():
                         font=("Arial", 30, "bold"))
         self.distance_result.grid(row=3, column=0, columnspan=2, sticky="we")
 
-    def distance_error(self, e1= None, e2= None):
+    def distance_error_display(self, e1= None, e2= None):
         self.distance_error_window= tk.Toplevel()
         self.distance_error_window.title("Error!")
         self.distance_error_window.resizable(False, False)
@@ -352,44 +352,44 @@ class Unit_converter_distance():
                         font=("Arial", 30, "bold"))
         self.distance_error_text.grid(row=0, column=0, columnspan=2, sticky="ew")
 
-        if (e1 and e2):
-            tk.Label(self.distance_error_window, text="\n\n",
-                        bg="#728C00",
-                        font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
+    def distance_error_both(self):
+        tk.Label(self.distance_error_window, text="\n\n",
+                    bg="#728C00",
+                    font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
 
-            self.distance_result= tk.Label(self.distance_error_window,
-                        text=f"1. 'Number' must be a number greater than or equal to zero",
-                            bg="#4CC417", fg="white",
-                            font=("Arial", 15, "bold"))
-            self.distance_result.grid(row=3, column=0, columnspan=2, sticky="w")
+        self.distance_result= tk.Label(self.distance_error_window,
+                    text=f"1. 'Number' must be a number greater than or equal to zero",
+                        bg="#4CC417", fg="white",
+                        font=("Arial", 15, "bold"))
+        self.distance_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
-            self.distance_result= tk.Label(self.distance_error_window,
-                        text=f"2. Units must be one from these: ('km', 'm', 'cm')",
-                            bg="#4CC417", fg="white",
-                            font=("Arial", 15, "bold"))
-            self.distance_result.grid(row=4, column=0, columnspan=2, sticky="w")
+        self.distance_result= tk.Label(self.distance_error_window,
+                    text=f"2. Units must be one from these: ('km', 'm', 'cm')",
+                        bg="#4CC417", fg="white",
+                        font=("Arial", 15, "bold"))
+        self.distance_result.grid(row=4, column=0, columnspan=2, sticky="w")
 
-        elif e1:
-            tk.Label(self.distance_error_window, text="\n\n",
-                        bg="#728C00",
-                        font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
+    def distance_error_first(self):
+        tk.Label(self.distance_error_window, text="\n\n",
+                    bg="#728C00",
+                    font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
 
-            self.distance_result= tk.Label(self.distance_error_window,
-                        text=f"1. Units must be one from these: ('km', 'm', 'cm')",
-                            bg="#4CC417", fg="white",
-                            font=("Arial", 18, "bold"))
-            self.distance_result.grid(row=3, column=0, columnspan=2, sticky="w")
+        self.distance_result= tk.Label(self.distance_error_window,
+                    text=f"1. Units must be one from these: ('km', 'm', 'cm')",
+                        bg="#4CC417", fg="white",
+                        font=("Arial", 18, "bold"))
+        self.distance_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
-        else:
-            tk.Label(self.distance_error_window, text="\n\n",
-                        bg="#728C00",
-                        font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="w")
+    def distance_error_second(self):
+        tk.Label(self.distance_error_window, text="\n\n",
+                    bg="#728C00",
+                    font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="w")
 
-            self.distance_result= tk.Label(self.distance_error_window,
-                        text=f"1. 'Number' must be a number greater than or equal to zero",
-                            bg="#4CC417", fg="white",
-                            font=("Arial", 15, "bold"))
-            self.distance_result.grid(row=3, column=0, columnspan=2, sticky="w")
+        self.distance_result= tk.Label(self.distance_error_window,
+                    text=f"1. 'Number' must be a number greater than or equal to zero",
+                        bg="#4CC417", fg="white",
+                        font=("Arial", 15, "bold"))
+        self.distance_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
     def distance_exit(self):
         self.distance_main_root.deiconify()
@@ -498,7 +498,7 @@ class Unit_converter_time():
                         font=("Arial", 30, "bold"))
         self.time_result.grid(row=3, column=0, columnspan=2, sticky="we")
 
-    def time_error(self, e1= None, e2= None):
+    def time_error_display(self, e1= None, e2= None):
         self.time_error_window= tk.Toplevel()
         self.time_error_window.title("Error!")
         self.time_error_window.resizable(False, False)
@@ -516,44 +516,44 @@ class Unit_converter_time():
                         font=("Arial", 30, "bold"))
         self.time_error_text.grid(row=0, column=0, columnspan=2, sticky="ew")
 
-        if (e1 and e2):
-            tk.Label(self.time_error_window, text="\n\n",
-                        bg="gray",
-                        font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
+    def time_error_both(self):
+        tk.Label(self.time_error_window, text="\n\n",
+                    bg="gray",
+                    font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
 
-            self.time_result= tk.Label(self.time_error_window,
-                        text=f"1. 'Number' must be a number greater than or equal to zero",
-                            bg="#A9A9A9", fg="white",
-                            font=("Arial", 15, "bold"))
-            self.time_result.grid(row=3, column=0, columnspan=2, sticky="w")
+        self.time_result= tk.Label(self.time_error_window,
+                    text=f"1. 'Number' must be a number greater than or equal to zero",
+                        bg="#A9A9A9", fg="white",
+                        font=("Arial", 15, "bold"))
+        self.time_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
-            self.time_result= tk.Label(self.time_error_window,
-                        text=f"2. Units must be 1 from these: ('hr', 'min', 'sec')",
-                            bg="#A9A9A9", fg="white",
-                            font=("Arial", 15, "bold"))
-            self.time_result.grid(row=4, column=0, columnspan=2, sticky="w")
+        self.time_result= tk.Label(self.time_error_window,
+                    text=f"2. Units must be 1 from these: ('hr', 'min', 'sec')",
+                        bg="#A9A9A9", fg="white",
+                        font=("Arial", 15, "bold"))
+        self.time_result.grid(row=4, column=0, columnspan=2, sticky="w")
 
-        elif e1:
-            tk.Label(self.time_error_window, text="\n\n",
-                        bg="gray",
-                        font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
+    def time_error_first(self):
+        tk.Label(self.time_error_window, text="\n\n",
+                    bg="gray",
+                    font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
 
-            self.time_result= tk.Label(self.time_error_window,
-                        text=f"1. Units must be one from these: ('hr', 'min', 'sec')",
-                            bg="#A9A9A9", fg="white",
-                            font=("Arial", 18, "bold"))
-            self.time_result.grid(row=3, column=0, columnspan=2, sticky="w")
+        self.time_result= tk.Label(self.time_error_window,
+                    text=f"1. Units must be one from these: ('hr', 'min', 'sec')",
+                        bg="#A9A9A9", fg="white",
+                        font=("Arial", 18, "bold"))
+        self.time_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
-        else:
-            tk.Label(self.time_error_window, text="\n\n",
-                        bg="gray",
-                        font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="w")
+    def time_error_second(self):
+        tk.Label(self.time_error_window, text="\n\n",
+                    bg="gray",
+                    font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="w")
 
-            self.time_result= tk.Label(self.time_error_window,
-                        text=f"1. 'Number' must be a number greater than or equal to zero",
-                            bg="#A9A9A9", fg="white",
-                            font=("Arial", 15, "bold"))
-            self.time_result.grid(row=3, column=0, columnspan=2, sticky="w")
+        self.time_result= tk.Label(self.time_error_window,
+                    text=f"1. 'Number' must be a number greater than or equal to zero",
+                        bg="#A9A9A9", fg="white",
+                        font=("Arial", 15, "bold"))
+        self.time_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
     def time_exit(self):
         self.time_main_root.deiconify()
