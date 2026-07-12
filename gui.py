@@ -31,7 +31,7 @@ class Unit_converter_intro():
         
         self.weight_option= tk.Button(self.root, text="1. Weight   ",
                         bg="yellow", fg="blue",
-                        font=("Arial", 18, "bold"), bd=3,
+                        font=("Arial", 18, "bold"), bd=4,
                         command= weight_choice)
         self.weight_option.grid(row=6, column=0, sticky='we')
 
@@ -41,7 +41,7 @@ class Unit_converter_intro():
         
         self.distance_option= tk.Button(self.root, text="2. Distance",
                         bg="yellow", fg="blue",
-                        font=("Arial", 18, "bold"), bd=3,
+                        font=("Arial", 18, "bold"), bd=4,
                         command= distance_choice)
         self.distance_option.grid(row=8, column=0, sticky='we')
 
@@ -51,7 +51,7 @@ class Unit_converter_intro():
         
         self.time_option= tk.Button(self.root, text="3. Time      ",
                         bg="yellow", fg="blue",
-                        font=("Arial", 18, "bold"), bd=3,
+                        font=("Arial", 18, "bold"), bd=4,
                         command= time_choice)
         self.time_option.grid(row=10, column=0, sticky='we')
 
@@ -61,7 +61,7 @@ class Unit_converter_intro():
         
         self.exit_button= tk.Button(self.root, text="4. Exit      ",
                         bg="#50C878", fg="blue",
-                        font=("Arial", 18, "bold"), bd=3,
+                        font=("Arial", 18, "bold"), bd=4,
                         command= self.root.destroy)
         self.exit_button.grid(row=12, column=0, sticky='we')
 
@@ -84,6 +84,16 @@ class Unit_converter_weight():
 
         self.root_weight.geometry(f"600x350+{self.x}+{self.y}")
 
+        weight_values= [
+            "kg --> g",
+            "kg --> mg",
+            "g --> kg",
+            "g --> mg",
+            "mg --> kg",
+            "mg --> g",
+
+        ]
+
         tk.Label(self.root_weight, text="",
                         bg="black",
                         font=("Arial", 10,)).grid(row=0, columnspan=2)
@@ -93,50 +103,39 @@ class Unit_converter_weight():
                         font=("Arial", 30, "bold"))
         self.weight_text.grid(row=2, column=0, columnspan=3, sticky="ew")
 
-        self.weight_units_text = tk.Label(self.root_weight,
-                        text="\nType one of these units:('kg', 'g', 'mg'):",
-                        bg="black", fg="white",
-                        font=("Arial", 20))
-        self.weight_units_text.grid(row=3, column=0, sticky="w")
-
-        tk.Label(self.root_weight, text="",
+        tk.Label(self.root_weight, text="\n\n",
                         bg="black",
-                        font=("Arial", 10, "bold")).grid(row=5, column=0)
+                        font=("Arial", 10, "bold")).grid(row=3, column=0)
         
-        self.weight_number_var= tk.StringVar(self.root_weight, value="Number")
-        self.weight_unit_from_var= tk.StringVar(self.root_weight, value="Unit")
-        self.weight_unit_to_var= tk.StringVar(self.root_weight, value="Unit")
+        self.weight_number_var= tk.StringVar(self.root_weight, value="Enter a number to convert")
+        self.weight_options_var= tk.StringVar(self.root_weight, value="Select from the list")
 
         self.weight_number_convert= tk.Entry(self.root_weight,
                         textvariable= self.weight_number_var,
-                        width=14,
-                        font=("Arial", 15, "bold"), bd=4
+                        font=("Arial", 15, "bold"), bd=4,
+                        bg= "blue", fg="white"
                         )
-        self.weight_number_convert.grid(row=6,column=0, sticky='ew')
+        self.weight_number_convert.config(width=40)
+        self.weight_number_convert.grid(row=4,column=0, sticky='we')
 
-        self.weight_unit_from_convert= tk.Entry(self.root_weight,
-                        textvariable= self.weight_unit_from_var,
-                        width=7, font=("Arial", 15, "bold"), bd=4)
-        self.weight_unit_from_convert.grid(row=6,column=0, sticky='e')
+        tk.Label(self.root_weight, text="\n",
+                        bg="black",
+                        font=("Arial", 10, "bold")).grid(row=5, column=0, sticky="e")
+        
+        weight_options_list= tk.OptionMenu(self.root_weight, self.weight_options_var, *weight_values)
+        weight_options_list.config(font=("Arial", 15, "bold"),  bd=4, width=40, anchor='w', bg= "blue", fg="white")
+        weight_options_list["menu"].config(font=("Arial", 20, "bold"))
+        weight_options_list.grid(row=6, column=0, sticky="we")
 
-        tk.Label(self.root_weight, text="",
+        tk.Label(self.root_weight, text="\n",
                         bg="black",
                         font=("Arial", 10, "bold")).grid(row=7, column=0, sticky="e")
-        
-        self.weight_unit_to_convert= tk.Entry(self.root_weight,
-                        textvariable= self.weight_unit_to_var,
-                        width=7, font=("Arial", 15, "bold"), bd=4)
-        self.weight_unit_to_convert.grid(row=8,column=0, sticky='w')
-
-        tk.Label(self.root_weight, text="",
-                        bg="black",
-                        font=("Arial", 10, "bold")).grid(row=9, column=0, sticky="e")
 
         self.weight_convert= tk.Button(self.root_weight, text="  Convert!",
                         bg="blue", fg="white",
                         font=("Arial", 20, "bold"), bd=4,
                         command= weight_converter)
-        self.weight_convert.grid(row=10, column=0, columnspan=3, sticky='we')
+        self.weight_convert.grid(row=8, column=0, columnspan=3, sticky='we')
 
         self.root_weight.protocol("WM_DELETE_WINDOW", self.weight_exit)
 
@@ -197,23 +196,23 @@ class Unit_converter_weight():
         self.weight_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
         self.weight_result= tk.Label(self.weight_error_window,
-                    text=f"2. Units must be one from these: ('kg', 'g', 'mg')",
+                    text=f"2. You should select an option from the list",
                         bg="blue", fg="white",
                         font=("Arial", 15, "bold"))
         self.weight_result.grid(row=4, column=0, columnspan=2, sticky="w")
 
-    def weight_error_first(self):
+    def weight_error_select(self):
         tk.Label(self.weight_error_window, text="\n\n",
                     bg="black",
                     font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
 
         self.weight_result= tk.Label(self.weight_error_window,
-                    text=f"1. Units must be one from these: ('kg', 'g', 'mg')",
+                    text=f"1. You should select an option from the list",
                         bg="blue", fg="white",
                         font=("Arial", 18, "bold"))
         self.weight_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
-    def weight_error_second(self):
+    def weight_error_number(self):
         tk.Label(self.weight_error_window, text="\n\n",
                     bg="black",
                     font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="w")
@@ -247,6 +246,15 @@ class Unit_converter_distance():
 
         self.root_distance.geometry(f"600x350+{self.x}+{self.y}")
 
+        distance_values= [
+            "km --> m",
+            "km --> cm",
+            "m --> km",
+            "m --> cm",
+            "cm --> km",
+            "cm --> m",
+        ]
+
         tk.Label(self.root_distance, text="",
                         bg="#728C00",
                         font=("Arial", 10,)).grid(row=0, columnspan=2)
@@ -256,54 +264,41 @@ class Unit_converter_distance():
                         font=("Arial", 30, "bold"))
         self.distance_text.grid(row=2, column=0, columnspan=3, sticky="ew")
 
-        self.distance_units_text = tk.Label(self.root_distance,
-                        text="\nType one of these units:('km', 'm', 'cm'):",
-                        bg="#728C00", fg="white",
-                        font=("Arial", 20))
-        self.distance_units_text.grid(row=3, column=0, sticky="w")
-
-        tk.Label(self.root_distance, text="",
+        tk.Label(self.root_distance, text="\n\n",
                         bg="#728C00",
-                        font=("Arial", 10, "bold")).grid(row=5, column=0)
-        
-        self.distance_number_var= tk.StringVar(self.root_distance, value="Number")
-        self.distance_unit_from_var= tk.StringVar(self.root_distance, value="Unit")
-        self.distance_unit_to_var= tk.StringVar(self.root_distance, value="Unit")
+                        font=("Arial", 10, "bold")).grid(row=3, column=0)
 
-        self.distance_number= tk.Entry(self.root_distance,
+        self.distance_number_var= tk.StringVar(self.root_distance, value="Enter a number to convert")
+        self.distance_options_var= tk.StringVar(self.root_distance, value="Select from the list")
+
+        self.distance_number_convert= tk.Entry(self.root_distance,
                         textvariable= self.distance_number_var,
-                        width=14,
                         font=("Arial", 15, "bold"), bd=4,
-                        fg='#6AA121')
-        self.distance_number.grid(row=6,column=0, sticky='ew')
+                        bg="#4CC417", fg="white"
+                        )
+        self.distance_number_convert.config(width=40)
+        self.distance_number_convert.grid(row=4,column=0, sticky='we')
 
-        self.distance_unit_from_convert= tk.Entry(self.root_distance,
-                        textvariable= self.distance_unit_from_var,
-                        width=7,
-                        font=("Arial", 15, "bold"), bd=4,
-                        fg='#6AA121')
-        self.distance_unit_from_convert.grid(row=6,column=0, sticky='e')
+        tk.Label(self.root_distance, text="\n",
+                        bg="#728C00",
+                        font=("Arial", 10, "bold")).grid(row=5, column=0, sticky="e")
+        
+        distance_options_list= tk.OptionMenu(self.root_distance, self.distance_options_var, *distance_values)
+        distance_options_list.config(font=("Arial", 15, "bold"),
+                        bd=4, width=40, anchor='w',
+                        bg="#4CC417", fg="white")
+        distance_options_list["menu"].config(font=("Arial", 20, "bold"))
+        distance_options_list.grid(row=6, column=0, sticky="we")
 
-        tk.Label(self.root_distance, text="",
+        tk.Label(self.root_distance, text="\n",
                         bg="#728C00",
                         font=("Arial", 10, "bold")).grid(row=7, column=0, sticky="e")
-        
-        self.distance_unit_to_convert= tk.Entry(self.root_distance,
-                            textvariable= self.distance_unit_to_var,
-                            width=7,
-                            font=("Arial", 15, "bold"), bd=4,
-                            fg='#6AA121')
-        self.distance_unit_to_convert.grid(row=8,column=0, sticky='w')
-
-        tk.Label(self.root_distance, text="",
-                        bg="#728C00",
-                        font=("Arial", 10, "bold")).grid(row=9, column=0, sticky="e")
 
         self.distance_convert= tk.Button(self.root_distance, text="  Convert!",
                         bg="#08A04B", fg= "white",
-                        font= ("Arial", 20, "bold"), bd= 4,
+                        font=("Arial", 20, "bold"), bd=4,
                         command= distance_converter)
-        self.distance_convert.grid(row=10, column= 0, columnspan= 3, sticky= 'we')
+        self.distance_convert.grid(row=8, column=0, columnspan=3, sticky='we')
 
         self.root_distance.protocol("WM_DELETE_WINDOW", self.distance_exit)
     
@@ -364,23 +359,23 @@ class Unit_converter_distance():
         self.distance_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
         self.distance_result= tk.Label(self.distance_error_window,
-                    text=f"2. Units must be one from these: ('km', 'm', 'cm')",
+                    text=f"2. You should select an option from the list",
                         bg="#4CC417", fg="white",
                         font=("Arial", 15, "bold"))
         self.distance_result.grid(row=4, column=0, columnspan=2, sticky="w")
 
-    def distance_error_first(self):
+    def distance_error_select(self):
         tk.Label(self.distance_error_window, text="\n\n",
                     bg="#728C00",
                     font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
 
         self.distance_result= tk.Label(self.distance_error_window,
-                    text=f"1. Units must be one from these: ('km', 'm', 'cm')",
+                    text=f"1. You should select an option from the list",
                         bg="#4CC417", fg="white",
                         font=("Arial", 18, "bold"))
         self.distance_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
-    def distance_error_second(self):
+    def distance_error_number(self):
         tk.Label(self.distance_error_window, text="\n\n",
                     bg="#728C00",
                     font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="w")
@@ -411,6 +406,15 @@ class Unit_converter_time():
 
         self.root_time.geometry(f"600x350+{self.x}+{self.y}")
 
+        time_values= [
+            "hr --> min",
+            "hr --> sec",
+            "min --> hr",
+            "min --> sec",
+            "sec --> hr",
+            "sec --> min",
+        ]
+
         tk.Label(self.root_time, text="",
                         bg="gray",
                         font=("Arial", 10,)).grid(row=0, columnspan=2)
@@ -420,54 +424,41 @@ class Unit_converter_time():
                         font=("Arial", 30, "bold"))
         self.time_text.grid(row=2, column=0, columnspan=3, sticky="ew")
 
-        self.time_units_text = tk.Label(self.root_time,
-                        text="\nType one of these units:('hr', 'min', 'sec'):",
+        tk.Label(self.root_time, text="\n\n",
                         bg="gray", fg="white",
-                        font=("Arial", 20))
-        self.time_units_text.grid(row=3, column=0, sticky="w")
+                        font=("Arial", 10, "bold")).grid(row=3, column=0)
 
-        tk.Label(self.root_time, text="",
-                        bg="gray",
-                        font=("Arial", 10, "bold")).grid(row=5, column=0)
-        
-        self.time_number_var= tk.StringVar(self.root_time, value="Number")
-        self.time_unit_from_var= tk.StringVar(self.root_time, value="Unit")
-        self.time_unit_to_var= tk.StringVar(self.root_time, value="Unit")
+        self.time_number_var= tk.StringVar(self.root_time, value="Enter a number to convert")
+        self.time_options_var= tk.StringVar(self.root_time, value="Select from the list")
 
-        self.time_number_from_convert= tk.Entry(self.root_time,
+        self.time_number_convert= tk.Entry(self.root_time,
                         textvariable= self.time_number_var,
-                        width=14,
                         font=("Arial", 15, "bold"), bd=4,
-                        fg="#504A4B")
-        self.time_number_from_convert.grid(row=6,column=0, sticky='ew')
+                        bg="gray", fg="white"
+                        )
+        self.time_number_convert.config(width=40)
+        self.time_number_convert.grid(row=4,column=0, sticky='we')
 
-        self.time_unit_from_convert= tk.Entry(self.root_time,
-                        textvariable= self.time_unit_from_var,
-                        width=7,
-                        font=("Arial", 15, "bold"), bd=4,
-                        fg="#504A4B")
-        self.time_unit_from_convert.grid(row=6,column=0, sticky='e')
+        tk.Label(self.root_time, text="\n",
+                        bg="gray",
+                        font=("Arial", 10, "bold")).grid(row=5, column=0, sticky="e")
+        
+        time_options_list= tk.OptionMenu(self.root_time, self.time_options_var, *time_values)
+        time_options_list.config(font=("Arial", 15, "bold"),
+                        bd=4, width=40, anchor='w',
+                        bg="gray", fg="white")
+        time_options_list["menu"].config(font=("Arial", 20, "bold"))
+        time_options_list.grid(row=6, column=0, sticky="we")
 
-        tk.Label(self.root_time, text="",
+        tk.Label(self.root_time, text="\n",
                         bg="gray",
                         font=("Arial", 10, "bold")).grid(row=7, column=0, sticky="e")
-        
-        self.time_unit_to_convert= tk.Entry(self.root_time,
-                        textvariable= self.time_unit_to_var,
-                        width=7,
-                        font=("Arial", 15, "bold"), bd=4,
-                        fg="#504A4B")
-        self.time_unit_to_convert.grid(row=8,column=0, sticky='w')
-
-        tk.Label(self.root_time, text="",
-                        bg="gray",
-                        font=("Arial", 10, "bold")).grid(row=9, column=0, sticky="e")
 
         self.time_convert= tk.Button(self.root_time, text="  Convert!",
                         bg="#A9A9A9", fg="white",
                         font=("Arial", 20, "bold"), bd=4,
                         command= time_converter)
-        self.time_convert.grid(row=10, column=0, columnspan=3, sticky='we')
+        self.time_convert.grid(row=8, column=0, columnspan=3, sticky='we')
 
         self.root_time.protocol("WM_DELETE_WINDOW", self.time_exit)
 
@@ -528,23 +519,23 @@ class Unit_converter_time():
         self.time_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
         self.time_result= tk.Label(self.time_error_window,
-                    text=f"2. Units must be 1 from these: ('hr', 'min', 'sec')",
+                    text=f"2. You should select an option from the list",
                         bg="#A9A9A9", fg="white",
                         font=("Arial", 15, "bold"))
         self.time_result.grid(row=4, column=0, columnspan=2, sticky="w")
 
-    def time_error_first(self):
+    def time_error_select(self):
         tk.Label(self.time_error_window, text="\n\n",
                     bg="gray",
                     font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="ew")
 
         self.time_result= tk.Label(self.time_error_window,
-                    text=f"1. Units must be one from these: ('hr', 'min', 'sec')",
+                    text=f"1. You should select an option from the list",
                         bg="#A9A9A9", fg="white",
                         font=("Arial", 18, "bold"))
         self.time_result.grid(row=3, column=0, columnspan=2, sticky="w")
 
-    def time_error_second(self):
+    def time_error_number(self):
         tk.Label(self.time_error_window, text="\n\n",
                     bg="gray",
                     font=("Arial", 10, "bold")).grid(row=1, column=0, sticky="w")
