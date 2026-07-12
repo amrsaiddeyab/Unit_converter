@@ -38,7 +38,7 @@ def main():
                 unit_from= unit_from.strip()
                 unit_to= unit_to.strip()
 
-            except:
+            except (ValueError, AttributeError):
                 error1= True
 
             finally:
@@ -85,7 +85,7 @@ def main():
                 unit_from= unit_from.strip()
                 unit_to= unit_to.strip()
 
-            except:
+            except (ValueError, AttributeError):
                 error1= True
 
             finally:
@@ -132,7 +132,7 @@ def main():
                 unit_from= unit_from.strip()
                 unit_to= unit_to.strip()
 
-            except:
+            except (ValueError, AttributeError):
                 error1= True
 
             finally:
