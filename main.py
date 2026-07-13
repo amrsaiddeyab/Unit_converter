@@ -44,7 +44,7 @@ def main():
             finally:
                 number = validation(number)
 
-                if number or number == 0:
+                if number is not None:
                     if not error1:
                         units_dict= {
                             "kg": 1,
@@ -91,7 +91,7 @@ def main():
             finally:
                 number = validation(number)
 
-                if number or number == 0:
+                if number is not None:
                     if not error1:
                         units_dict= {
                             "km": 1,
@@ -138,7 +138,7 @@ def main():
             finally:
                 number = validation(number)
 
-                if number or number == 0:
+                if number is not None:
                     if not error1:
                         units_dict= {
                             "hr": 1,
